@@ -59,3 +59,7 @@
 ## PyCharm plugin:
 
 You need to install the intellibot plugin in $automation/intellibot.zip manually (install plugin from disk) in order to support Yaml resource file.
+
+## How To Run:
+
+python generator.py --dir automation --lib ModLib  --browser chrome
