@@ -10,7 +10,7 @@ import re
 
 CUSTOMIZED_LIB_DEFAULT_NAME = "MyCustomizedLibrary"
 
-DIRECTORIES = ['Libs', 'Pages', 'Resources', 'Tests', "Utilities", 'Webdrivers']
+DIRECTORIES = ['Libs', 'Pages', 'Tests/Data', 'Tests', "Utilities", 'Webdrivers']
 DIRECTORY_PATHS = {}
 
 DEMO_URL = "http://automationpractice.com"
@@ -25,6 +25,7 @@ def create_options_parser():
     group1 = optparse.OptionGroup(parser, 'Test related options')
     group2 = optparse.OptionGroup(parser, 'Common options')
 
+    group2.add_option("-i", "--initialize", dest="init", help="Initialize a blank new RobotFramework Project [default: %d]", action="store_true", default=False)
     group1.add_option("-l", "--libs", dest="libs",help="Name of customized library [default: %d]", default=CUSTOMIZED_LIB_DEFAULT_NAME)
     group2.add_option("-d", "--dir", dest="dir",help="Target directory for the test project [default: %d]", default=os.path.join(".","MyProject"))
     group2.add_option("-u", "--url", dest="url",help="Web App URL [default: %d]", default=DEMO_URL)
@@ -79,6 +80,11 @@ def write_on_template(filename, search_string, replace_string):
         s = s.replace(search_string, replace_string)
         f.write(s)
 
+def _clone_blank_files(project_dir):
+    print("Generate blank project....")
+    shutil.copytree("blank/", project_dir)
+    print("DONE!")
+
 def _clone_template_files(project_dir, lib_name):
     print("Cloning from template....")
 
@@ -87,19 +93,26 @@ def _clone_template_files(project_dir, lib_name):
     libs_path = os.path.join(project_dir, "Libs")
     mylib_path = os.path.join(libs_path, lib_name)
 
+    print(os.listdir(libs_path))
+    children = os.listdir(libs_path)
+
     if not os.path.exists(mylib_path):
         os.makedirs(mylib_path)
 
+    for child in children:
+        old_path = os.path.join(libs_path, child)
+        shutil.move(old_path, mylib_path)
+
+
+    # old_keywords_path = os.path.join(libs_path, "keywords")
+    # old_utils_path = os.path.join(libs_path, "utilities")
+    # old_init_file_path = os.path.join(libs_path, "__init__.py")
+
+    # shutil.move(old_keywords_path, mylib_path)
+    # shutil.move(old_utils_path, mylib_path)
+    # shutil.move(old_init_file_path, mylib_path)
+
     keywords_path = os.path.join(mylib_path, "keywords")
-
-    old_keywords_path = os.path.join(libs_path, "keywords")
-    old_utils_path = os.path.join(libs_path, "utilities")
-    old_init_file_path = os.path.join(libs_path, "__init__.py")
-
-    shutil.move(old_keywords_path, mylib_path)
-    shutil.move(old_utils_path, mylib_path)
-    shutil.move(old_init_file_path, mylib_path)
-
 
     files = get_all_files_in_dir(project_dir, ['.py', '.robot'])
     for file in files:
@@ -125,32 +138,42 @@ def _init_setting(dir, url, browser):
     write_on_template(setting_file_path, "<BROWSER>", browser)
     print("DONE!")
 
+def _generate_blank_project(project_name):
+    _clone_blank_files(project_name)
+
 def main(options = None):
 
     parser = create_options_parser()
     (options, args) = parser.parse_args()
 
 #1. setup options
+    is_blank_project = options.init or False
     project_name = options.dir or sys.exit("Error: No path was defined")
     shutil.rmtree(project_name, ignore_errors=True)
-    lib_name = options.libs or CUSTOMIZED_LIB_DEFAULT_NAME
-    url = options.url or DEMO_URL
-    browser = options.browser or "chrome"
 
-#2. setup paths
-    for dir in DIRECTORIES:
-        DIRECTORY_PATHS.update({dir : os.path.join(project_name, dir)})
+    if not is_blank_project:
+        lib_name = options.libs or CUSTOMIZED_LIB_DEFAULT_NAME
+        url = options.url or DEMO_URL
+        browser = options.browser or "chrome"
 
-#3. Clone template files
-    _clone_template_files(project_name, lib_name)
+    #2. setup paths
+        for dir in DIRECTORIES:
+            DIRECTORY_PATHS.update({dir : os.path.join(project_name, dir)})
+
+    #3. Clone template files
+        _clone_template_files(project_name, lib_name)
 
 
-#4. Initialize template files
-    _init_library(DIRECTORY_PATHS['Libs'], project_name, lib_name)
-    # # _create_resources(DIRECTORY_PATHS['Resources'])
-    # # _create_tests(DIRECTORY_PATHS['Tests'])
-    _init_setting(DIRECTORY_PATHS['Resources'], url, browser)
-    # _create_webdriver(DIRECTORY_PATHS['Webdrivers'], browser)
+    #4. Initialize template files
+        _init_library(DIRECTORY_PATHS['Libs'], project_name, lib_name)
+        # # _create_resources(DIRECTORY_PATHS['Resources'])
+        # # _create_tests(DIRECTORY_PATHS['Tests'])
+        _init_setting(DIRECTORY_PATHS['Tests/Data'], url, browser)
+        # _create_webdriver(DIRECTORY_PATHS['Webdrivers'], browser)
+
+#2. Generate a blank project
+    else:
+        _generate_blank_project(project_name)
 
 if __name__ == '__main__':
     main()

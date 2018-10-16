@@ -73,7 +73,7 @@ class MyCustomizedLibraryKeywords(LibraryComponent):
     @keyword
     def get_login_alert_messages(self):
         alert = self.get_alert_div()
-        return [li.get_attribute("textContent").strip for li in alert.find_elements_by_tag_name("li")]
+        return [li.get_attribute("textContent").strip() for li in alert.find_elements_by_tag_name("li")]
 
     @keyword
     def is_error_message(self, error_message):

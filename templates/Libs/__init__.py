@@ -1,11 +1,6 @@
 from SeleniumLibrary import SeleniumLibrary
-from SeleniumLibrary.base import keyword, LibraryComponent
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from webcolors import *
-import time
-import os
 from .keywords import *
+from .extendedkeywords import *
 
 __version__ = '1.0.0'
 

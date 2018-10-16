@@ -1,7 +1,6 @@
 from SeleniumLibrary.base import keyword, LibraryComponent
 from SeleniumLibrary.keywords import ElementKeywords as SeleniumElementKeywords
 from selenium.webdriver.common.keys import Keys
-import os
 
 
 class ElementKeywords(LibraryComponent):

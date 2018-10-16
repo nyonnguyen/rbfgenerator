@@ -1,0 +1,5 @@
+BROWSER:  <browser-type: chrome|firefox|other-defined-browser-type>
+# BROWSER_DRIVER_PATH: E:\MyProject\webdriver\chromedriver\chromedriver
+WEB_URL: <Web App URL>
+DEFAULT_USERNAME: <default-username>
+DEFAULT_PASSWORD: <default-password>

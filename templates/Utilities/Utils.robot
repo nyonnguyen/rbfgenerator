@@ -1,7 +1,7 @@
 *** Settings ***
 Library  MyCustomizedLibrary
 Library  OperatingSystem
-Variables      ../Resources/settings.yaml
+Variables      ../Tests/Data/settings.yaml
 
 *** Keywords ***
 User Open Browser And Go To Webview

@@ -1,0 +1,15 @@
+TC_01_1:
+  USERNAME: ""
+  PASSWORD: password
+TC_01_2:
+  USERNAME: ntnhon@gmail.com
+  PASSWORD:
+TC_01_3:
+  USERNAME: invalideemail
+  PASSWORD: incorrectpassword
+TC_01_4:
+  USERNAME: incorrect@gmail.com
+  PASSWORD: incorrectpassword
+TC_01_5:
+  USERNAME: ntnhon@gmail.com
+  PASSWORD: 12345678x@X

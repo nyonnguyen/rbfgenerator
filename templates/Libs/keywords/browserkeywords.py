@@ -13,7 +13,7 @@ __version__ = '1.0.0'
 
 class BrowserKeywords(LibraryComponent):
 
-    FIREFOX_DRIVER_PATH = "/Webdrivers/firefox/firefox"
+    FIREFOX_DRIVER_PATH = "/Webdrivers/firefoxdriver/geckodriver"
     CHROME_DRIVER_PATH = "\Webdrivers\chromedriver\chromedriver"
 
     def __init__(self, ctx):
