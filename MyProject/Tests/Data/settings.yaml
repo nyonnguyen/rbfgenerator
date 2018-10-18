@@ -1,0 +1,6 @@
+BROWSER:  chrome
+# BROWSER_DRIVER_PATH: E:\MyProject\webdriver\chromedriver\chromedriver
+WEB_URL: http://automationpractice.com
+DEFAULT_USERNAME: ntnhon@gmail.com
+DEFAULT_PASSWORD: 12345678x@X
+USER_NAME: Nyon Nguyen
