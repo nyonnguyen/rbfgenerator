@@ -1,11 +1,11 @@
 *** Settings ***
 Library           MyCustomizedLibrary
-Resource          ../../../Pages/Home/Home_Page.robot
+Resource          ../Pages/Home/Home_Page.robot
 Resource          Base_Test.robot
 
 Suite Setup       User Prepare The Test Environment
 
-Suite Teardown    Close Browser
+Suite Teardown    User Cleanup The Test Environment
 
 *** Keywords ***
 

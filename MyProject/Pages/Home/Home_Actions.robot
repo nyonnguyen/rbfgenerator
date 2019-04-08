@@ -4,16 +4,16 @@ Resource          ./Home_Variables.robot
 
 *** Keywords ***
 Navigate To Home
-  Go To  ${HOME_URL}
-  Home Page Content Should Be Appeared
+    Go To  ${HOME_URL}
+    Home Page Content Should Be Appeared
 
 Logout
-  Wait Until Element Is Visible    ${LOGOUT_BUTTON}
-  Click Button    ${LOGOUT_BUTTON}
+    Wait Until Element Is Visible    ${LOGOUT_BUTTON}
+    Click Button    ${LOGOUT_BUTTON}
 
 Home Page Content Should Be Appeared
-  Wait Until Element Is Visible  ${HOME_PAGE_MAIN_TAB}
-  Wait Until Element Is Visible  ${HOME_PRODUCT_LIST}
+    Wait Until Element Is Visible  ${HOME_PAGE_MAIN_TAB}
+    Wait Until Element Is Visible  ${HOME_PRODUCT_LIST}
 
 Click On Item On Home Page
     [Arguments]  ${p_name}  ${p_price}

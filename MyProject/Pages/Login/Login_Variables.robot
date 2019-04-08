@@ -11,4 +11,4 @@ ${USERNAME_IS_INVALID_MESSAGE}       Invalid email address.
 ${PASSWORD_IS_REQUIRED_MESSAGE}      Password is required.
 ${AUTHEN_FAILED_MESSAGE}             Authentication failed.
 
-${LOGIN_URL}   ${WEB_URL}/index.php?controller=my-account
+${LOGIN_URL}   ${WEB_URL}/index.php?controller=authentication&back=my-account

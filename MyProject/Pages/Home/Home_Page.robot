@@ -8,7 +8,7 @@ User Should See The Content Of Home Page
 
 User Navigate To Home Page
   Navigate To Home
-  Wait Until Home Page Is Loaded
+  User Should See The Content Of Home Page
 
 User Clicks On Item ${name} With Price ${price}
   Click On Item On Home Page   ${name}  ${price}
