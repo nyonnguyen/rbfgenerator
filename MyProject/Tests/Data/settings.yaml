@@ -5,8 +5,8 @@ BROWSER:
   HEADLESS: False
 #  WINDOW_SIZE: "1920,1080"  #Recommended 1920,1080
 #  BROWSER_ARGUMENTS:
-#    - arg1=abc
-#    - arg2=xyz
+#    no-sandbox
+#    arg2=xyz
 
 WEB_URL: http://automationpractice.com
 

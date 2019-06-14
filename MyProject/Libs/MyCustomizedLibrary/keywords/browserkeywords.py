@@ -34,12 +34,15 @@ _DEFAULT_LIBRARY_PATH = '<relative_path_to_here>'
 _XLSX_EXTENSION = '.xlsx'
 _CSV_EXTENSION = '.csv'
 
+
 def format_os_path(path):
     return path.replace('\\', '/') if os.sep == '/' else path.replace('/', '\\')
 
 
 def format_executable_path(path):
-    return format_os_path(path if ".exe" in path else path + ".exe")
+    if os.name == 'nt':
+        path = path if ".exe" in path else path + ".exe"
+    return format_os_path(path)
 
 
 def get_project_path():
@@ -81,16 +84,17 @@ class BrowserKeywords(LibraryComponent):
           HEADLESS: True
           WINDOW_SIZE: 1920,1080
           BROWSER_ARGUMENTS:
-            - arg1=value1
-            - arg2=value2
+            no-sandbox
+            arg2=value2
         """
         # init browsers
-        firefox = AosBrowser('firefox', 'ff', None, '\Webdrivers\\firefoxdriver\geckodriver', False, None, None)
-        chrome = AosBrowser('chrome', 'gc', None, '\Webdrivers\\chromedriver\chromedriver', False, None, None)
-        ie = AosBrowser('ie', 'ie', None, '\Webdrivers\\iedriver\IEDriverServer', False, None, None)
+        firefox = AosBrowser('firefox', 'ff', None, '/Webdrivers/firefoxdriver/geckodriver', False, None, None)
+        chrome = AosBrowser('chrome', 'gc', None, '/Webdrivers/chromedriver/chromedriver', False, None, None)
+        ie = AosBrowser('ie', 'ie', None, '/Webdrivers/iedriver/IEDriverServer', False, None, None)
         _BROWSER_MAP = {'firefox': firefox,
-                            'chrome': chrome,
-                            'ie': ie}
+                        'chrome': chrome,
+                        'ie': ie}
+
         browser_type = settings.get(_BROWSER_TYPE_KEY).strip().lower()
         bin_path = settings.get(_BROWSER_BINARY_PATH_KEY, None)
         driver_path = settings.get(_BROWSER_DRIVER_PATH_KEY)
@@ -365,8 +369,9 @@ class AosBrowser(object):
     def get_options(self):
         if self.get_type() == 'firefox':
             options = FirefoxOptions()
-            if self.get_args() is not None:
-                for arg in self.get_args():
+            arg_list = self.get_args().split()
+            if arg_list is not None:
+                for arg in arg_list:
                     options.add_argument('--' + arg)
             if self.bin_path is not None:
                 options.binary_location(self.bin_path)
@@ -391,8 +396,9 @@ class AosBrowser(object):
             # proceed IE options here
         else:
             options = ChromeOptions()
-            if self.get_args() is not None:
-                for arg in self.get_args():
+            arg_list = self.get_args().split()
+            if arg_list is not None:
+                for arg in arg_list:
                     options.add_argument(arg)
             if self.bin_path is not None:
                 options.binary_location(self.bin_path)
