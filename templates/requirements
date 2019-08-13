@@ -1,0 +1,8 @@
+pydevd >= 1.4.0
+PyYAML >= 3.13
+robotframework >= 3.1.2
+robotframework-seleniumlibrary >= 3.2.0
+robotframework-sshlibrary >= 3.3.0
+selenium >= 3.14.1
+webcolors >= 1.8.1
+xlrd >= 1.2.0

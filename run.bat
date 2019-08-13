@@ -1,0 +1,1 @@
+robot -P ./Libs -d Results -i %1 Tests

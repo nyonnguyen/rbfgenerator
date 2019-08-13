@@ -52,6 +52,7 @@ def get_project_path():
     # return os.path.dirname(__file__).replace(_DEFAULT_LIBRARY_PATH, '')
     return os.getcwd()
 
+
 def get_download_path(re_path=''):
     d_path = get_project_path() + '\\' + (_DEFAULT_DOWNLOAD_PATH if re_path == '' else re_path)
     return format_os_path(d_path)
@@ -369,11 +370,10 @@ class AosBrowser(object):
     def get_options(self):
         if self.get_type() == 'firefox':
             options = FirefoxOptions()
-            arg_list = self.get_args().split()
-            if arg_list is not None:
-                for arg in arg_list:
+            if self.get_args():
+                for arg in self.get_args().split():
                     options.add_argument('--' + arg)
-            if self.bin_path is not None:
+            if self.bin_path:
                 options.binary_location(self.bin_path)
             if self.get_headless():
                 options.headless = True
@@ -396,11 +396,10 @@ class AosBrowser(object):
             # proceed IE options here
         else:
             options = ChromeOptions()
-            arg_list = self.get_args().split()
-            if arg_list is not None:
-                for arg in arg_list:
+            if self.get_args():
+                for arg in self.get_args().split():
                     options.add_argument(arg)
-            if self.bin_path is not None:
+            if self.bin_path:
                 options.binary_location(self.bin_path)
             if self.get_headless():
                 options.headless = True

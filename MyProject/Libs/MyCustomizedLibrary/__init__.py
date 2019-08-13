@@ -16,7 +16,7 @@ class MyCustomizedLibrary(SeleniumLibrary):
         ####################################################################################
         # Make sure pydevd installed: pip install pydevd
         # AND Uncomment following codes to enable debug mode
-        # sys.path.append("pycharm-debug-py3k.egg")
+        # sys.path.append("pydevd-pycharm.egg")
         # import pydevd
         # pydevd.settrace('localhost', port=12345, stdoutToServer=True, stderrToServer=True)
         ####################################################################################

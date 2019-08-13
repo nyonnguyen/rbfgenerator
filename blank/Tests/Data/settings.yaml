@@ -1,5 +1,15 @@
-BROWSER:  <browser-type: chrome|firefox|other-defined-browser-type>
-# BROWSER_DRIVER_PATH: E:\MyProject\webdriver\chromedriver\chromedriver
+BROWSER:
+  TYPE: <browser-type: chrome|firefox|other-defined-browser-type>
+#  BROWSER_BINARY_PATH: <path_name_of_browser_binary>
+#  BROWSER_DRIVER_PATH: I:\AOS\aos-web2\test\automation\webdriver\chromedriver\chromedriver.exe
+  HEADLESS: False
+#  WINDOW_SIZE: "1920,1080"  #Recommended 1920,1080
+#  BROWSER_ARGUMENTS:
+#    no-sandbox
+#    arg2=xyz
+
 WEB_URL: <Web App URL>
+
 DEFAULT_USERNAME: <default-username>
 DEFAULT_PASSWORD: <default-password>
+
